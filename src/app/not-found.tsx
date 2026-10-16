@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound(){return <main id="main-content" style={{maxWidth:600,margin:'18vh auto',padding:24}}><p style={{color:'#f0b90b'}}>404 / LOST IN THE PIPELINE</p><h1 style={{fontSize:48}}>This page hasn’t shipped.</h1><p style={{color:'#848e9c',lineHeight:1.8}}>Return to the workspace or start with a public repository.</p><Link href="/workspace" style={{display:'inline-block',background:'#f0b90b',color:'#111',padding:'14px 22px',borderRadius:8,marginTop:24}}>Back to workspace →</Link></main>}
