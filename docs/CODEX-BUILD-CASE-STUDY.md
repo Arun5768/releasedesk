@@ -1,5 +1,7 @@
 # ReleaseDesk: a Codex build case study
 
+**Live app:** [releasedesk-one.vercel.app](https://releasedesk-one.vercel.app) · **Source:** [Arun5768/releasedesk](https://github.com/Arun5768/releasedesk) · **Passing CI:** [GitHub Actions run](https://github.com/Arun5768/releasedesk/actions/runs/38944534786)
+
 ## The problem
 
 Public GitHub release evidence lives in several places: repository metadata, community documents, Actions, commits and releases. ReleaseDesk brings selected signals into one review screen, attaches source links and lets the user track the follow-up work.
@@ -12,11 +14,11 @@ The project began as a portfolio build for a prospective Codex Ambassador. It wa
 
 The aim is to demonstrate a complete, inspectable piece of work: product scope, user interface, read-only API integration, local state, reports and verification. It is also an opportunity to teach how to make AI-generated product claims match the software that actually exists.
 
-## What Codex contributes
+## What Codex contributed
 
-Codex is being used to plan and implement the application, connect the public GitHub API, build the interface, define evidence checks, write focused verification and prepare project documentation. Parallel implementation and documentation work is reviewed against the same product contract.
+Codex planned and implemented the application, connected the public GitHub API, built the interface, defined evidence checks, wrote focused verification and prepared project documentation. Parallel implementation and documentation work was reviewed against the same product contract. The implemented local workflow has been exercised from onboarding through a real scan and a downloaded Markdown report.
 
-This record should be updated with the final repository, deployment and verification results before it is used as a completed-project claim. A plan, generated code or a passing development build alone does not establish production reliability.
+The source is public and the free MVP is deployed on Vercel. The verification record below distinguishes local browser checks, automated checks and public deployment smoke checks. Generated code or a passing production build alone does not establish production reliability.
 
 ## Design decisions worth teaching
 
@@ -44,18 +46,21 @@ The proposed Pro price is $12/month and Studio is $29/month. These are unvalidat
 
 ## Implementation and evidence record
 
-At the time of this initial case-study draft, implementation is in progress. The application owner should replace the pending statuses below with the observed final results. Do not convert a pending item to completed without checking the relevant behavior.
+Verification recorded across **16–17 October 2026 (Asia/Calcutta)** includes 17 passing automated tests, a passing typecheck, a successful Next.js 16.4.2 production build, passing GitHub CI, local browser checks, and public deployment smoke checks. These are bounded observations; downloaded JSON contents and browser error states remain unverified.
 
 | Area | Evidence to retain | Current verification record |
 | --- | --- | --- |
-| Public repository scan | A real repository input and source-linked response. | Pending final verification. |
-| Score and coverage | Tests or worked examples for pass, warning, failure and unknown states. | Pending final verification. |
-| Failure handling | Invalid input, unavailable repository and upstream error examples. | Pending final verification. |
-| Workspace and fix queue | Onboarding, task status/notes and persistence after refresh. | Pending final verification. |
-| History and exports | Two scan snapshots plus readable Markdown and JSON output. | Pending final verification. |
-| Automated checks | Exact test, typecheck and build commands with their results. | Pending final verification. |
-| Public repository | Repository URL and the commit containing this version. | Not recorded in this draft. |
-| Deployment | Working application URL and deployment-specific smoke check. | Not recorded in this draft. |
+| Public repository scan | A real repository input and source-linked response. | Local browser onboarding → workspace completed a live `cli/cli` scan: `source: "github"`, six checks, score 100, coverage 100. The deployed endpoint also scanned `Arun5768/releasedesk`: `source: "github"`, six checks, score 83, coverage 100, `warnings: []`. These are checklist observations, not security certifications. |
+| Score and coverage | Tests or worked examples for known and unknown states. | Automated scoring and scanner tests passed, including unknown-evidence exclusion and failed-workflow handling. The live scan displayed score and coverage separately. |
+| Failure handling | Invalid inputs and upstream error examples. | Automated checks passed for rejected repository inputs, partial API outages, private-data exclusion, draft-release exclusion and rate-limit reset information. Browser error-state checks remain unrecorded. |
+| Workspace and fix queue | Onboarding, task status/notes and persistence after refresh. | Browser onboarding and arrival in the workspace verified. A fix-queue note and `in_progress` status survived a local browser refresh. Storage regression tests passed, including cached-scan deduplication, task reopening and preservation of notes when evidence is unavailable. |
+| History and exports | Scan snapshots plus readable Markdown and JSON output. | Markdown report downloaded and contents inspected. The labeled sample history comparison showed +7 with checks side by side. JSON-export success UI was observed; downloaded JSON contents have not yet been inspected. Automated report and backup tests passed. |
+| Automated checks | Exact test, typecheck and build commands with their results. | `npm test`: 17/17 passed. `npm run typecheck`: passed. `npm run build`: passed with Next.js 16.4.2; all application routes built successfully. [GitHub CI passed](https://github.com/Arun5768/releasedesk/actions/runs/38944534786). |
+| Responsive interface | Desktop and mobile browser inspection. | Overview and report views checked at 390 × 844: no horizontal overflow, and mobile navigation worked. The public landing page was also inspected in the browser. This is targeted QA, not comprehensive device coverage. |
+| Public repository | Repository URL and the commit containing this version. | [Arun5768/releasedesk](https://github.com/Arun5768/releasedesk), initial published commit [`de19051`](https://github.com/Arun5768/releasedesk/commit/de19051). |
+| Deployment | Working application URL and deployment-specific smoke check. | [releasedesk-one.vercel.app](https://releasedesk-one.vercel.app), Vercel project `kuei2/releasedesk` on Hobby, deployed directly by CLI. Unauthenticated `GET /api/health` and a live `POST /api/scan` succeeded. |
+
+The Vercel GitHub integration attempt failed because the GitHub login connection must be completed in Vercel. Automatic deployments on push are **not active**. The current deployment came from the CLI, and future updates require manual deployment until that connection is configured.
 
 Planned capabilities include cloud accounts, team workspaces, private repository access, scheduled scans and subscription entitlements. They are separate from the local MVP and should not appear in the completed-feature list.
 
@@ -74,7 +79,7 @@ Use the clearly labeled demo only when a real API response is unavailable, and s
 
 ## Application answer template
 
-Use this only after the described features work and a shareable link is available. Replace the brackets with verified details and check the final form's character count.
+The app and source links above are available. Adapt this template to your own explanation, replace the brackets with the recorded checks and links, and check the final form's character count.
 
 > I built ReleaseDesk with Codex to turn public GitHub release evidence into an actionable review. It links findings to their sources, separates unknown evidence from failures, and includes a local fix queue and exportable reports. I verified it with [actual checks] and documented its limits. Demo/code: [link].
 

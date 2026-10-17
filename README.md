@@ -2,7 +2,27 @@
 
 Turn public GitHub release evidence into a review you can act on. ReleaseDesk scans selected repository signals, explains its findings, separates evidence coverage from the score, and supports a local fix queue and exportable reports.
 
-**Status:** a functional MVP under final verification. It is designed for public repositories and browser-local workspaces. It has no multi-user authentication, cloud synchronization or subscription entitlement backend. See the [build case study](docs/CODEX-BUILD-CASE-STUDY.md) for the verification and deployment record.
+**Live app:** [releasedesk-one.vercel.app](https://releasedesk-one.vercel.app) · **Source:** [Arun5768/releasedesk](https://github.com/Arun5768/releasedesk) · **Passing CI:** [GitHub Actions run](https://github.com/Arun5768/releasedesk/actions/runs/38944534786)
+
+**Status:** a deployed, free MVP with passing automated checks, a successful production build, and verified local and public smoke checks. The app is designed for public repositories and browser-local workspaces; it has no multi-user authentication, cloud synchronization or implemented paid subscription system. See the [build case study](docs/CODEX-BUILD-CASE-STUDY.md) for the verification and deployment record.
+
+## Verification record
+
+Observed across 16–17 October 2026 (Asia/Calcutta):
+
+- `npm test`: **17/17 tests passed**, including scanner, scoring, backup validation, report and storage regression checks.
+- `npm run typecheck`: **passed**.
+- `npm run build`: **passed** with Next.js **16.4.2**; all application routes built successfully.
+- The local browser flow from onboarding to workspace completed a live scan of **`cli/cli`**. The response reported `source: "github"`, six checks, a score of **100**, and evidence coverage of **100**. These values describe the observed checklist at scan time, not the repository's security or production readiness.
+- A Markdown report was downloaded through the browser and its contents inspected.
+- A fix-queue note and `in_progress` status survived a local browser refresh.
+- Mobile overview and report views were checked at **390 × 844** with no horizontal overflow; mobile navigation worked. This is a targeted viewport check, not exhaustive device testing.
+- The sample history comparison showed **+7** and checks side by side. This comparison uses labeled sample data.
+- The JSON-export success state was observed in the browser. Inspection of the downloaded JSON contents remains pending.
+- [GitHub Actions CI](https://github.com/Arun5768/releasedesk/actions/runs/38944534786) passed. The initial published commit is [`de19051`](https://github.com/Arun5768/releasedesk/commit/de19051).
+- The public deployment's landing page was checked in the browser, and unauthenticated `GET /api/health` succeeded. A deployed `POST /api/scan` for `Arun5768/releasedesk` returned `source: "github"`, six checks, score **83**, coverage **100**, and `warnings: []`.
+
+Downloaded JSON contents and browser error-state checks remain unrecorded. These checks establish the observed behavior, not a guarantee of production reliability.
 
 ## Run locally
 
@@ -114,7 +134,9 @@ Redirects only to a configured HTTPS `buy.stripe.com` URL. No subscription statu
 
 This app uses server routes and is not a static-export-only site. A public deployment can share the server's GitHub API budget across visitors; production traffic requires an abuse-control and rate-limit plan. Browser-local workspace data remains on each visitor's device. Clearing that storage can remove it, and a different origin starts a different local workspace.
 
-No public repository or deployment URL is asserted in this README until the application owner records the verified result.
+The public app is deployed at [releasedesk-one.vercel.app](https://releasedesk-one.vercel.app) in Vercel project `kuei2/releasedesk` on the Hobby plan. It was deployed directly with the Vercel CLI. Public health and live scan smoke checks passed.
+
+**Automatic GitHub deployments are not connected.** The GitHub integration attempt failed because Vercel requires its GitHub login connection to be completed. Future updates require a manual CLI deployment until that connection is configured; pushing a commit alone does not currently deploy the app.
 
 ## Project structure
 
